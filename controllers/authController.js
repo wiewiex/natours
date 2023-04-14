@@ -177,3 +177,24 @@ exports.resetPassword = async (req, res, next) => {
     token,
   });
 };
+
+exports.updatePassword = async (req, res, next) => {
+  const { currentPassword, newPassword, newPasswordConfirm } = req.body;
+
+  const user = await User.findOne(req.user._id).select('+password');
+
+  if (!(await user.correctPassword(currentPassword, user.password))) {
+    return next(new AppError('Incorrect current password'), 401);
+  }
+
+  user.password = newPassword;
+  user.passwordConfirm = newPasswordConfirm;
+  await user.save();
+
+  const token = signToken(user._id);
+
+  res.status(200).json({
+    status: 'success',
+    token,
+  });
+};
