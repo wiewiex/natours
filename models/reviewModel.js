@@ -36,7 +36,7 @@ const reviewSchema = new mongoose.Schema(
 reviewSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'author',
-    select: '-__v',
+    select: 'name',
   });
 
   next();
