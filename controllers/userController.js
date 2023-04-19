@@ -8,6 +8,11 @@ exports.getUser = handlerFactory.getOne(User);
 exports.updateUser = handlerFactory.updateOne(User);
 exports.deleteUser = handlerFactory.deleteOne(User);
 
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
+
 const filterObj = (originalObj, ...allowedFields) => {
   const filteredObj = {};
 
