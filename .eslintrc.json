@@ -16,6 +16,15 @@
     "prefer-arrow-callback": "off",
     "prefer-destructuring": ["error", { "object": true, "array": false }],
     "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|val" }],
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "import/no-extraneous-dependencies": "off"
+    // [
+    //   "error",
+    //   {
+    //     "devDependencies": false,
+    //     "optionalDependencies": false,
+    //     "peerDependencies": false
+    //   }
+    // ]
   }
 }
