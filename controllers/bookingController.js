@@ -53,6 +53,7 @@ exports.getMyBookings = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.createBooking = handlerFactory.createOne(Booking);
 exports.getOneBooking = handlerFactory.getOne(Booking);
 exports.getAllBookings = handlerFactory.getAll(Booking);
 exports.deleteOneBooking = handlerFactory.deleteOne(Booking);

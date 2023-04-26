@@ -9,35 +9,21 @@ router.get(
   authController.protect,
   bookingController.getCheckoutSession
 );
-
 router.get('/success', bookingController.createBookingCheckout);
 
-router.get(
-  '/my-bookings',
-  authController.protect,
-  authController.restrictTo('user'),
-  bookingController.getMyBookings
-);
+router.use(authController.protect);
 
-router.get(
-  '/',
-  authController.protect,
-  authController.restrictTo('admin'),
-  bookingController.getAllBookings
-);
+router.get('/my-bookings', bookingController.getMyBookings);
 
-router.get(
-  '/:id',
-  authController.protect,
-  authController.restrictTo('admin'),
-  bookingController.getOneBooking
-);
+router.use(authController.restrictTo('admin'));
 
-router.delete(
-  '/:id',
-  authController.protect,
-  authController.restrictTo('admin'),
-  bookingController.deleteOneBooking
-);
+router
+  .route('/')
+  .get(bookingController.getAllBookings)
+  .post(bookingController.createBooking);
+router
+  .route('/:id')
+  .get(bookingController.getOneBooking)
+  .delete(bookingController.deleteOneBooking);
 
 module.exports = router;
