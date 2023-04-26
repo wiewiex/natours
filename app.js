@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const errorController = require('./controllers/errorController');
@@ -16,6 +17,14 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 
 const app = express();
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+  })
+);
+
+app.options('*', cors());
 
 app.enable('trust proxy');
 
